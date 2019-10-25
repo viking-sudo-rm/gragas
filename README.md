@@ -1,7 +1,4 @@
-Grágás is a collection of Python utilities functions that I have found useful.
-
-I organized these into a pip-installable package for the benefit of myself, as
-well as anyone else who wants to use them.
+Grágás (/grau:gau:s/) is a collection of useful utility functions that I have built up. I organized these into a pip-installable package for the benefit of myself, as well as anyone else who wants to use them.
 
 ## Installation
 
