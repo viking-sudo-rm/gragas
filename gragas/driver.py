@@ -40,8 +40,18 @@ class Driver:
     @classmethod
     def add_arguments(cls, parser: ArgumentParser) -> None:
         """Add arguments that specify the experiment."""
-        parser.add_argument(f"--{cls.flag_str}", type=str, default=cls.default, choices=list(cls.registry))
-    
+        if cls.default is not None:
+            parser.add_argument(
+                f"--{cls.flag_str}",
+                type=str,
+                default=cls.default,
+                choices=list(cls.registry),
+            )
+        else:
+            parser.add_argument(
+                f"--{cls.flag_str}", type=str, choices=list(cls.registry)
+            )
+
     @classmethod
     def run(cls, args: Namespace) -> None:
         """Run an experiment driver specified by args."""
@@ -51,9 +61,11 @@ class Driver:
     @classmethod
     def register(cls, name: str = None, default: bool = False):
         """Decorator to register a driver via `Driver.register()`."""
+
         def _closure(callback):
             new_name = name or callback.__name__
             cls.registry[new_name] = callback
             if default:
                 cls.default = new_name
+
         return _closure
